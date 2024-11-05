@@ -24,7 +24,7 @@ This is the backend application for the Employee Management System, built using 
    cd employee-management-system
 3. **Set up the database**:
    -> Create a database named **employee_management_app**.
-    -> Update the application.properties file with this database credentials:
+     -> Update the application.properties file with this database credentials:
    **spring.datasource.url=jdbc:mysql://localhost:3306/employee_management_app
       spring.datasource.username=root
       spring.datasource.password=root@123**
