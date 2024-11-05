@@ -22,15 +22,15 @@ This is the backend application for the Employee Management System, built using 
    git clone https://github.com/Deepika1202/employee.git
 2. **Navigate to the project**:
    cd employee-management-system
-3.**Set up the database**:
+3. **Set up the database**:
    -> Create a database named **employee_management_app**.
-   -> Update the application.properties file with this database credentials:
- **spring.datasource.url=jdbc:mysql://localhost:3306/employee_management_app
-   spring.datasource.username=root
-   spring.datasource.password=root@123**
-4.**Build the project**:
+    -> Update the application.properties file with this database credentials:
+   **spring.datasource.url=jdbc:mysql://localhost:3306/employee_management_app
+      spring.datasource.username=root
+      spring.datasource.password=root@123**
+4. **Build the project**:
    mvn clean install
-5.**Run the application**:
+5. **Run the application**:
    mvn spring-boot:run
 
 ### API Documentation
