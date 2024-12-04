@@ -22,18 +22,21 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
+//import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 import com.task.employee.entity.Employee;
 import com.task.employee.model.EmployeeDto;
 import com.task.employee.repository.EmployeeRepo;
 import com.task.employee.serviceImpl.EmployeeServiceImpl;
 import com.task.employee.services.EmployeeService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceTests {
     
 	@Mock
 	private EmployeeRepo employeeRepo;
+	@Mock
+	private PasswordEncoder passwordEncoder;
 	
 	@InjectMocks
 	private EmployeeServiceImpl employeeServiceImpl;
@@ -48,9 +51,12 @@ public class EmployeeServiceTests {
 	        }
 		EmployeeDto employeeDto = new EmployeeDto();
 		employeeDto.setId(employee.getId());
-		employeeDto.setFirstname(employee.getFirstname());
-		employeeDto.setLastname(employee.getLastname());
+	//	employeeDto.setirstname(employee.getFirstname());
+//		employeeDto.setLastname(employee.getLastname());
+		employeeDto.setUsername(employee.getUsername());
+		employeeDto.setPassword(employee.getPassword());
 		employeeDto.setEmail(employee.getEmail());
+		employeeDto.setRole(employee.getRole());
 		return employeeDto;
 	}
 	
@@ -61,9 +67,11 @@ public class EmployeeServiceTests {
 		Employee employee = new  Employee();
 		
 		employee.setId(employeeDto.getId());
-		employee.setFirstname(employeeDto.getFirstname());
-		employee.setLastname(employeeDto.getLastname());
+		employee.setUsername(employeeDto.getUsername());
+		//employee.setLastname(employeeDto.getLastname());
 		employee.setEmail(employeeDto.getEmail());
+		employee.setPassword(employeeDto.getPassword());
+		employee.setRole(employeeDto.getRole());
 		return employee;
 	}
 	
@@ -74,9 +82,11 @@ public class EmployeeServiceTests {
 		 MockitoAnnotations.openMocks(this);	
 		 employee = Employee.builder()
 	    			.id(1L)
-	    			.firstname("John")
-	    			.lastname("abc")
-	    			.email("abc@gmail.com").build();
+	    			.username("John")
+	    			.email("abc@gmail.com")
+				 .password("john123")
+				 .role("USER")
+				 .build();
 	}
 	
 	
@@ -88,7 +98,7 @@ public class EmployeeServiceTests {
 		when(employeeRepo.save(any(Employee.class))).thenReturn(employee);
 		EmployeeDto savedEmployee = employeeServiceImpl.createEmployee(employeeDto);
 		assertNotNull(savedEmployee);
-		assertEquals("John",savedEmployee.getFirstname());
+		assertEquals("John",savedEmployee.getUsername());
 	}
     
     
@@ -96,9 +106,9 @@ public class EmployeeServiceTests {
     @Test
     public void getAllEmployeesTest()
     {
-    	Employee employee1 = new Employee(1L,"John","abc","abc@gmail.com");
+    	Employee employee1 = new Employee(1L,"John","john123","abc@gmail.com","ADMIN");
     			
-    	Employee employee2 = new Employee(2L,"fed","feddy","fed@gmail.com");
+    	Employee employee2 = new Employee(2L,"fed","fed123","fed@gmail.com","USER");
 
 //        List<Employee> employees = new ArrayList();
 //        employees.add(employee1);
@@ -106,7 +116,7 @@ public class EmployeeServiceTests {
        when(employeeRepo.findAll()).thenReturn(List.of(employee1, employee2));
    List<EmployeeDto> savedEmployees  = employeeServiceImpl.getAllEmployees();
        assertEquals(2,savedEmployees.size());
-       assertEquals("fed",savedEmployees.get(1).getFirstname());
+       assertEquals("fed",savedEmployees.get(1).getUsername());
     }
     
     
@@ -139,18 +149,11 @@ public class EmployeeServiceTests {
     public void toeditemployeeTest()
     {
     	when(employeeRepo.findById(employee.getId())).thenReturn(Optional.of(employee));
-    	employee.setFirstname("jack");
+    	employee.setUsername("jack");
     	EmployeeDto employeeDto = employeeServiceImpl.toeditemployee(employee.getId(), employee);
   
     	assertNotNull(employee);
-    	assertEquals("jack",employee.getFirstname());
-    	System.out.print(employee.getFirstname());
+    	assertEquals("jack",employee.getUsername());
+    	System.out.print(employee.getUsername());
     }
-    
-	
-    
-	
-	
-	
-	
 }
