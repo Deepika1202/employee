@@ -3,6 +3,7 @@ package com.task.employee.model;
 
 
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -23,14 +24,16 @@ public class EmployeeDto {
 	private long id;
 	
 	@NotEmpty(message = "Please Enter First Name!!")
-	private String firstname;
+	@Column(unique = true)
+	private String username;
 	
-	@NotEmpty(message = "Please Enter Last Name!!")
-	private String lastname;
+
 	
 	@Email(message = "Enter a valid Email address!!")
+	@Column(unique = true)
 	private String email;
-	
+	private String password;
+	private String role;
    
 	
 

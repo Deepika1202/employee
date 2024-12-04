@@ -1,4 +1,4 @@
-package com.task.employee;
+package com.task.employee.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -8,9 +8,11 @@ public class Mapper {
 	{
 		Employee employee = new Employee();
 		employee.setId(employeeDto.getId());
-		employee.setFirstname(employeeDto.getFirstname());
-		employee.setLastname(employeeDto.getLastname());
+		employee.setUsername(employeeDto.getUsername());
+
 		employee.setEmail(employeeDto.getEmail());
+		employee.setPassword(employeeDto.getPassword());
+		employee.setRole(employeeDto.getRole());
 		return employee;
 	}
 	
@@ -19,8 +21,8 @@ public class Mapper {
 		{
 			EmployeeDto employeeDto = new EmployeeDto();
 			employeeDto.setId(employee.getId());
-			employeeDto.setFirstname(employee.getFirstname());
-			employeeDto.setLastname(employee.getLastname());
+			employeeDto.setUsername(employee.getUsername());
+
 			employeeDto.setEmail(employee.getEmail());
 			return employeeDto;
 		}

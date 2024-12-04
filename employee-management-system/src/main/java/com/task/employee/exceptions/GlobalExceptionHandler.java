@@ -1,5 +1,6 @@
 package com.task.employee.exceptions;
 
+import jakarta.persistence.EntityExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +18,12 @@ public class GlobalExceptionHandler {
 	
 		return new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
 	}
-	
+	@ExceptionHandler(EntityExistsException.class)
+	public ResponseEntity<String> handleEntityExistsException(EntityExistsException ex)
+	{
+
+
+		return new ResponseEntity<String>(ex.getMessage(),HttpStatus.BAD_REQUEST);
+	}
 	
 }
